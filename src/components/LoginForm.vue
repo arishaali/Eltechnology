@@ -29,8 +29,8 @@
         placeholder="Enter Password"
         class="shadow appearance-none border lg:mr-8 rounded block sm:w-60  md:w-96 lg:w-11/12 mx-auto p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       />
-      <a href="#" class="text-sm font-medium">Forget Password?</a>
-    
+      <a href="#" class="text-sm font-medium" @click.prevent="toggleForgotPassword">Forget Password?</a>
+       <ForgotPassword v-if="forgot" :toggle="toggleForgotPassword"/>
     </div>
 
     <button class="text-white bg-black p-2 w-52 sm:w-60 md:w-96 lg:w-11/12 rounded-md mt-6">
@@ -46,12 +46,17 @@
 
 <script>
 import axios from 'axios'
+import ForgotPassword from '@/components/ForgotPassword.vue'
 export default {
+  components: {
+    ForgotPassword
+  },
   data() {
     return{
       email: '',
       password: '',
       error: '',
+      forgot: false
       // showPassword: false
     }
   },
@@ -87,7 +92,10 @@ export default {
             this.error = "Fields cannot be empty."
           }
         }
-    }
+    },
+     toggleForgotPassword(){
+        this.forgot = !this.forgot
+      }
   }
 }
 </script>
