@@ -54,7 +54,7 @@
         <input
           type="email"
           v-model="state.FormData.email"
-          placeholder="Enter Email"
+          placeholder="name@mail.com"
           class="shadow appearance-none border rounded  xl:w-64  p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
         />
         <p
@@ -74,8 +74,9 @@
           name="mobile"
           v-model="state.FormData.phone"
           id="mobile"
-          placeholder="Enter your mobile number"
-          pattern="[0-9]{4}[0-9]{7}"
+          placeholder="0097412345678"
+          pattern="[0-9]{5}[0-9]{8}"
+          maxlength="13"
           class="shadow appearance-none border rounded  xl:w-64  p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
         <p
@@ -137,12 +138,13 @@
       
     </div>
 
-    <div class="flex flex-col  md:flex-row">
-      <div class="mb-8">
+    <div class="flex flex-col  md:flex-row" >
+      <div class="mb-8"  v-if="$route.name!=='Manager'">
         <label for="Department" class="block text-black text-md font-bold mb-1"
           >Department</label
         >
         <select
+        v-if="$route.name=='User'"
           name="Department"
           id="Department"
           v-model="state.FormData.department"
@@ -150,9 +152,23 @@
           class="shadow border rounded  xl:w-64  p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         >
           <option selected disabled>Select</option>
-          <option  v-for="dep in department" :key="dep">{{ dep }}</option>
+          <option  v-for="dep in department" :key="dep" >{{ dep }}</option>
+          
         </select>
+        <select
+        v-if="$route.name=='Solution Designer' || $route.name=='Demand Manager'"
+          name="Department"
+          id="Department"
+          
+          placeholder="Select"
+          class="shadow border rounded  xl:w-64  p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        >
+          <option value="Information Technology" selected>Information Technology</option>
+          
+        </select>
+        <!-- {{$route.name}} -->
         <p
+        
           class="text-red-600 font-bold capitalize"
           v-for="(error, index) of v$.FormData.department.$errors"
           :key="index"
@@ -161,8 +177,13 @@
         </p>
       </div>
       <div>
-        <button
+        <button  v-if="$route.name!=='Manager'"
           class="text-white bg-black p-2 w-40 rounded-full my-6 ml-12 2xl:ml-20"
+        >
+          Signup
+        </button>
+         <button  v-if="$route.name=='Manager'"
+          class="text-white bg-black p-2 w-40 rounded-full my-6 "
         >
           Signup
         </button>
@@ -258,7 +279,7 @@ export default {
           email: this.state.FormData.email,
           phone: this.state.FormData.phone,
           password: this.state.FormData.password.password,
-          department: this.state.FormData.department,
+          department: 'Information Technology',
           
         })
       )
@@ -279,7 +300,7 @@ export default {
           email: this.state.FormData.email,
           phone: this.state.FormData.phone,
           password: this.state.FormData.password.password,
-          department: this.state.FormData.department,
+          department: 'Information Technology'
           
         })
       )
@@ -299,7 +320,6 @@ export default {
           email: this.state.FormData.email,
           phone: this.state.FormData.phone,
           password: this.state.FormData.password.password,
-          department: this.state.FormData.department,
           
         })
       )
