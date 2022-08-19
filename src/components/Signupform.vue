@@ -167,14 +167,16 @@
           
         </select>
         <!-- {{$route.name}} -->
+        <div  v-if="$route.name=='User'">
         <p
-        
+         
           class="text-red-600 font-bold capitalize"
           v-for="(error, index) of v$.FormData.department.$errors"
           :key="index"
         >
-        <small>{{ error.$message }}</small>
+        <small >{{ error.$message }}</small>
         </p>
+        </div>
       </div>
       <div>
         <button  v-if="$route.name!=='Manager'"
@@ -252,7 +254,7 @@ export default {
       if(this.v$.$error == false){
       if(this.$route.name=='User'){
       let result = await axios.post(
-        "https://elbackendapp.azurewebsites.net/signup/user/", JSON.stringify(
+        "http://127.0.0.1:8000/signup/user/", JSON.stringify(
         {
           first_name: this.state.FormData.first_name,
           last_name: this.state.FormData.last_name,
@@ -269,7 +271,9 @@ export default {
         // localStorage.setItem("status",result.status)
       }
       }
+      }
 
+      if(this.v$.$error == false || this.state.FormData.department == ''){
       if(this.$route.name=='Demand Manager'){
       let result1 = await axios.post(
         "http://127.0.0.1:8000/signup/Demand Manager/", JSON.stringify(
@@ -288,8 +292,10 @@ export default {
         // localStorage.setItem("user-info",result1.data)
         // localStorage.setItem("status",this.$route.name)
         this.$router.push("/")
+       
       }
       }
+
 
       if(this.$route.name=='Solution Designer'){
       let result2 = await axios.post(
@@ -310,6 +316,7 @@ export default {
         // localStorage.setItem("user-info",result2.data)
       }
       }
+      
 
       if(this.$route.name=='Manager'){
       let result3 = await axios.post(
