@@ -68,9 +68,11 @@ export default {
           password: this.password
         }));
         localStorage.setItem('token', response.data.token)
-        localStorage.setItem('status', response.data.status)
-        const unwrapped = JSON.parse(JSON.stringify(response.data.profile));
+        // localStorage.setItem('status', response.data.status)
+        if(response.data.profile.length == 1){
+        const unwrapped = JSON.parse(JSON.stringify(response.data.profile[0]));
         localStorage.setItem('name',unwrapped.user.first_name + ' ' + unwrapped.user.last_name)
+        localStorage.setItem('status', response.data.profile[0].status)
         if(response.data.status == 'user'){
           this.$router.push('/create')
         }
@@ -83,6 +85,10 @@ export default {
         if(response.data.status == 'Manager'){
           this.$router.push('/manager')
         }
+      }
+      if(response.data.profile.length > 1){
+          this.$router.push({ name: 'LoginAs', params: {profile: response.data.profile }})
+      }
       }
         catch(e) {
           if (e) {
