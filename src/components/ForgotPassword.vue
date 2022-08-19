@@ -31,7 +31,7 @@
         placeholder="Your email address"
         class="appearance-none border rounded sm:w-60 md:w-96 lg:w-full mx-auto p-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
       />
-      <button class="text-white bg-black p-2 w-52 sm:w-60 md:w-96 lg:w-full rounded-md ">
+      <button @click="forgotPassword" class="text-white bg-black p-2 w-52 sm:w-60 md:w-96 lg:w-full rounded-md ">
       Send
     </button>
       </div>
@@ -43,8 +43,21 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     props: ["toggle"],
+    data() {
+      return{
+          email: ''
+      }
+    },
+    methods: {
+      async forgotPassword(){
+        await axios.post('http://127.0.0.1:8000/create/password-reset/', JSON.stringify({
+          email: this.email
+        }));
+      }
+    }
    
 }
 </script>

@@ -192,6 +192,7 @@
       </div>
     </div>
     </form>
+    <AccountCreated v-if="successful" :toggle="toggleMessage" />
   </div>
 </template>
 
@@ -200,13 +201,18 @@ import axios from "axios";
 import useValidate from '@vuelidate/core'
 import { required, minLength, sameAs } from '@vuelidate/validators'
 import { reactive, computed } from 'vue'
+import AccountCreated from '@/components/AccountCreated.vue'
 
 export default {
   data() {
     return {    
       department: ['Finance','Procurement','Public Relations','Information Technology','Technical Affairs','Water Affairs','Water Projects','Electricity Affairs','Planning and Quality','Customer Service','Human Resources','General Services','Conservation','District Cooling','President Office'],
-      error: ''
+      error: '',
+      successful: false
     }
+  },
+  components: {
+    AccountCreated
   },
   setup() {
     const state = reactive({
@@ -266,9 +272,7 @@ export default {
       )
       console.warn(result);
       if (result.status == 201) {
-        this.$router.push("/")
-        // localStorage.setItem("user-info",result.data)
-        // localStorage.setItem("status",result.status)
+        this.successful = true
       }
       }
       }
@@ -289,10 +293,7 @@ export default {
       )
       console.warn(result1);
       if (result1.status == 201) {
-        // localStorage.setItem("user-info",result1.data)
-        // localStorage.setItem("status",this.$route.name)
-        this.$router.push("/")
-       
+        this.successful = true  
       }
       }
 
@@ -312,8 +313,7 @@ export default {
       )
       console.warn(result2);
       if (result2.status == 201) {
-        this.$router.push("/")
-        // localStorage.setItem("user-info",result2.data)
+        this.successful = true
       }
       }
       
@@ -332,8 +332,7 @@ export default {
       )
       console.warn(result3);
       if (result3.status == 201) {
-        this.$router.push("/")
-        // localStorage.setItem("user-info",result3.data)
+        this.successful = true
       }
       }
       }
@@ -347,6 +346,9 @@ export default {
       let char = String.fromCharCode(e.keyCode); 
       if(/^[A-Za-z]+$/.test(char)) return true; 
       else e.preventDefault(); 
+    },
+    toggleMessage() {
+      this.successful = !this.successful
     }
 },
   mounted () {
