@@ -87,10 +87,12 @@ export default {
       this.selectedFile = event.target.files[0]
     },
     async OnUpload() {
+      let status= localStorage.getItem('status');
       try{
       const fd = new FormData();
       fd.append('name', this.name)
       fd.append('description', this.description)
+      fd.append('status', status)
       if(this.selectedFile == null){
         // ..
       } else{
