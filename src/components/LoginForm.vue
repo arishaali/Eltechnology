@@ -89,10 +89,30 @@ export default {
       if(response.data.profile.length > 1){
           // console.log(response.data.profile)
           let users = []
+          if(response.data.profile.length == 2){
           let status = response.data.profile[0].status
           let status2 = response.data.profile[1].status
           users.push(status)
           users.push(status2)
+          }
+          if(response.data.profile.length == 3){
+          let status = response.data.profile[0].status
+          let status2 = response.data.profile[1].status
+           let status3 = response.data.profile[2].status
+          users.push(status)
+          users.push(status2)
+          users.push(status3)
+          }
+          if(response.data.profile.length == 4){
+          let status = response.data.profile[0].status
+          let status2 = response.data.profile[1].status
+          let status3 = response.data.profile[2].status
+          let status4 = response.data.profile[3].status
+          users.push(status)
+          users.push(status2)
+          users.push(status3)
+          users.push(status4)
+          }
           // console.log(users)
           this.$router.push({ name: 'LoginAs', params: {profile: users }})
       }

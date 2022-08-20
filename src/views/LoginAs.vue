@@ -11,7 +11,7 @@
            v-for="pro in profile"
             :key="pro"
             @click="Page(pro)"
-            class="px-2 text-sm text-white bg-black py-3 lg:px-6 w-11/12 rounded-md mt-6 flex justify-between"
+            class="px-2 text-sm text-white bg-black py-3 lg:px-6 w-11/12 rounded-md mt-6 flex justify-between cursor-pointer"
           >
             <div class="capitalize">
               <i class="fas fa-user mr-1"></i>
@@ -39,6 +39,7 @@ export default {
   },
   methods: {
     Page(name) {
+      localStorage.setItem('status', name)
       if (name == "user") {
         this.$router.push("/create");
       }
