@@ -56,7 +56,7 @@ export default {
       email: '',
       password: '',
       error: '',
-      forgot: false
+      forgot: false,
       // showPassword: false
     }
   },
@@ -68,10 +68,10 @@ export default {
           password: this.password
         }));
         localStorage.setItem('token', response.data.token)
-        // localStorage.setItem('status', response.data.status)
-        if(response.data.profile.length == 1){
         const unwrapped = JSON.parse(JSON.stringify(response.data.profile[0]));
         localStorage.setItem('name',unwrapped.user.first_name + ' ' + unwrapped.user.last_name)
+        // localStorage.setItem('status', response.data.status)
+        if(response.data.profile.length == 1){
         localStorage.setItem('status', response.data.profile[0].status)
         if(response.data.profile[0].status == 'user'){
           this.$router.push('/create')
@@ -87,7 +87,14 @@ export default {
         }
       }
       if(response.data.profile.length > 1){
-          this.$router.push({ name: 'LoginAs', params: {profile: response.data.profile }})
+          // console.log(response.data.profile)
+          let users = []
+          let status = response.data.profile[0].status
+          let status2 = response.data.profile[1].status
+          users.push(status)
+          users.push(status2)
+          // console.log(users)
+          this.$router.push({ name: 'LoginAs', params: {profile: users }})
       }
       }
         catch(e) {
