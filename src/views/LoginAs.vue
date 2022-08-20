@@ -34,4 +34,5 @@ export default {
         profile: Array
     }
 }
+
 </script>

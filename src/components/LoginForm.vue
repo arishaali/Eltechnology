@@ -73,16 +73,16 @@ export default {
         const unwrapped = JSON.parse(JSON.stringify(response.data.profile[0]));
         localStorage.setItem('name',unwrapped.user.first_name + ' ' + unwrapped.user.last_name)
         localStorage.setItem('status', response.data.profile[0].status)
-        if(response.data.status == 'user'){
+        if(response.data.profile[0].status == 'user'){
           this.$router.push('/create')
         }
-        if(response.data.status == 'Demand Manager'){
+        if(response.data.profile[0].status == 'Demand Manager'){
           this.$router.push('/evaluate')
         }
-        if(response.data.status == 'Solution Designer'){
+        if(response.data.profile[0].status == 'Solution Designer'){
           this.$router.push('/mapRequest')
         }
-        if(response.data.status == 'Manager'){
+        if(response.data.profile[0].status == 'Manager'){
           this.$router.push('/manager')
         }
       }
