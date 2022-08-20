@@ -16,6 +16,7 @@ import UserEditRequest from "../views/UserEditRequest.vue"
 import MapRequests from "../views/MapRequests.vue"
 import Assign from '../views/Assign.vue'
 import ReturnedRequest from '../views/ReturnedRequest.vue'
+import ResetPassword from '../views/ResetPassword.vue'
 // import store from "../store"
 
 const routes: Array<RouteRecordRaw> = [
@@ -123,6 +124,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/reviewRequest',
     name: 'ReturnedRequest',
     component: ReturnedRequest
+  },
+  {
+    path: '/password-reset/:token',
+    name: 'ResetPassword',
+    component: ResetPassword
   }
 ];
 
