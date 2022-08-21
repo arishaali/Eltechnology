@@ -92,12 +92,12 @@ export default {
       const fd = new FormData();
       fd.append('name', this.name)
       fd.append('description', this.description)
-      fd.append('status', status)
-      if(this.selectedFile == null){
+      if(this.selectedFile == ''){
         // ..
       } else{
-      fd.append('attachment',this.selectedFile, this.selectedFile.name)
+        fd.append('attachment',this.selectedFile, this.selectedFile.name)
       }
+      fd.append('status', status)
 
       let token = localStorage.getItem('token')
       let response = await axios.post('http://127.0.0.1:8000/request/create/', fd, {headers: {
