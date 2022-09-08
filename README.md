@@ -6,7 +6,7 @@
 
 To clone the repository, enter the following command on your terminal
 
-```git clone https://github.com/syedbilal28/ElTechnology```
+```git clone https://github.com/arishaali/Eltechnology.git```
 
 **Installing the packages**
 
