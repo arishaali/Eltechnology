@@ -1,5 +1,7 @@
 # El Frontend
 
+El is a B2B application, which allows users to create request upon what they need to done, and then managed by demand manager.
+
 ## Project Setup
 
 **Cloning the Repository**
